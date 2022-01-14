@@ -1,3 +1,3 @@
-import { headerPhone } from "./modules/headerPhone";
+import { header } from "./modules/header";
 
-headerPhone();
+header();

@@ -445,6 +445,10 @@ template, [hidden] {
     color: #ffffff;
 }
 
+.header-contacts__phone-number--show {
+    opacity: 1!important;
+}
+
 .header-contacts__phone-number-wrap {
     position: relative;
     display: -webkit-box;
@@ -479,6 +483,10 @@ template, [hidden] {
     transition: 0.5s;
 }
 
+.header-contacts__phone-number-accord--open {
+    position: relative;
+}
+
 .header-contacts__phone-number-accord a {
     -webkit-transition: 0.5s;
     transition: 0.5s;
@@ -494,6 +502,10 @@ template, [hidden] {
 .header-contacts__arrow img {
     margin-top: 12px;
     margin-left: 5px;
+}
+
+.header-contacts__arrow-img--open {
+    transform: rotate(180deg);
 }
 
 .header-contacts__messagers {
