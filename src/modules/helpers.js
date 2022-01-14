@@ -76,4 +76,4 @@ const animateValue = (obj, start, end, duration) => {
   window.requestAnimationFrame(step);
 };
 
-export { animate, blockBody, unblockBody, animateValue };
+export { animate, blockBody, unblockBody, animateValue, smoothScroll };

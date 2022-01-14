@@ -4837,6 +4837,10 @@ div.wave-block:nth-child(17):after {
     }
 }
 
+.popup-dialog-menu--active {
+    transform: translate3d(0, 0, 0);
+}
+
 @media (max-width: 575px) and (max-height: 812px) {
     .popup-dialog-menu {
         height: 655px;
@@ -5712,6 +5716,10 @@ div.wave-block:nth-child(17):after {
 
 .popup-repair-types-content-table__list td .repair-types-value {
     width: 20%;
+}
+
+.popup-menu--active {
+    visibility: visible;
 }
 
 .popup-menu-title {
