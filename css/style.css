@@ -5722,6 +5722,10 @@ div.wave-block:nth-child(17):after {
     visibility: visible;
 }
 
+.popup-repair-types--active {
+    visibility: visible;
+}
+
 .popup-menu-title {
     font-family: Montserrat Alternates;
     font-style: normal;

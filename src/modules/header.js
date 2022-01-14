@@ -8,6 +8,8 @@ export const header = () => {
   const menuIcon = document.querySelector('.menu__icon');
   const popupMenu = document.querySelector('.popup-menu');
   const popupDialog = popupMenu.querySelector('.popup-dialog-menu');
+  const showAllServicesBtns = document.querySelectorAll('.show-all-services');
+  const popularRepairTypes = document.querySelector('.popup-repair-types');
 
   const toggleShowContact = () => {
     secondContactAccord.classList.toggle('header-contacts__phone-number-accord--open');
@@ -29,21 +31,37 @@ export const header = () => {
     unblockBody();
   };
 
+  const showAllServices = (e) => {
+    e.preventDefault();
+    closeMenu();
+    blockBody();
+
+    popularRepairTypes.classList.add('popup-repair-types--active');
+  };
+
+  const hideAllServices = () => {
+    unblockBody();
+    popularRepairTypes.classList.remove('popup-repair-types--active');
+  };
+
   menuIcon.addEventListener('click', openMenu);
 
   document.addEventListener('click', (e) => {
     const target = e.target;
 
-    if (target.closest('.close-menu')) {
+    if (target.closest('.close-menu') || target.classList.contains('popup-menu--active')) {
       closeMenu();
-    } else if (target.classList.contains('popup-menu--active')) {
-      closeMenu();
-    } else if (target.classList.contains('menu-link')) {
+    } else if (target.closest('.popup-menu-nav__item')) {
       smoothScroll(target, e);
       closeMenu();
     } else if (target.closest('.button-footer')) {
       const link = target.closest('.button-footer').querySelector('a');
       smoothScroll(link, e);
+    } else if (target.closest('.repair-types--close') || target.classList.contains('popup-repair-types--active')) {
+      hideAllServices();
     }
+
   });
+
+  showAllServicesBtns.forEach(btn => btn.addEventListener('click', (e) => showAllServices(e)));
 };
