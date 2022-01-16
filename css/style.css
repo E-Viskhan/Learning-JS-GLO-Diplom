@@ -9007,4 +9007,20 @@ strong {
     .formula-slider {
         margin-top: 50px;
     }
+
+    .repair-types-nav__item>svg {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .nav-list-repair {
+        flex-wrap: nowrap;
+        max-width: none;
+        min-width: max-content;
+    }
+
+}
+
+.d-none {
+    display: none!important;
 }
