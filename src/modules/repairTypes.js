@@ -10,7 +10,7 @@ export const repairTypes = () => {
     contentClass: '.repair-types__tab-content'
   });
 
-  if (window.screen.width < 1026) {
+  if (window.screen.width < 1025) {
     slider({
       slidesClass: '.repair-types-nav__item',
       prevId: 'nav-arrow-repair-left_base',

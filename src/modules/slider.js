@@ -1,5 +1,5 @@
 export const slider = ({
-  slidesClass, prevId, nextId, slidesWrapperClass, slidesFieldClass, totalClass, currentClass
+  slidesClass, prevId, nextId, slidesWrapperClass, slidesFieldClass, totalClass, currentClass, slidesPerView = 1
 }) => {
   const slidesWrapper = document.querySelector(slidesWrapperClass),
     slides = slidesWrapper.querySelectorAll(slidesClass),
@@ -10,7 +10,8 @@ export const slider = ({
     current = document.querySelector(currentClass),
     total = document.querySelector(totalClass),
     isVisibleSlider = () => getComputedStyle(slidesField).display !== 'none',
-    setTotalSlidesNumber = () => total.textContent = slides.length;
+    setTotalSlidesNumber = () => total.textContent = slides.length,
+    slideWidth = Math.ceil(parseFloat(width) / slidesPerView);
 
   const incrementCurrentSlideNumber = () => {
     if (+current.textContent === slides.length) {
@@ -32,23 +33,37 @@ export const slider = ({
 
   let offset = 0;
 
-  slidesField.style.width = 100 * slides.length + '%';
+  slidesField.style.width = 100 * slides.length / slidesPerView + '%';
   slidesField.style.display = 'flex';
   slidesField.style.minWidth = 'max-content';
   slidesField.style.transition = '0.5s all';
 
   slidesWrapper.style.overflow = 'hidden';
-  slides.forEach(slide => { slide.style.width = width; });
+
+  slides.forEach(slide => { slide.style.width = slideWidth + 'px'; });
 
   next.addEventListener('click', () => {
     if (!isVisibleSlider()) { return; }
     if (current) { incrementCurrentSlideNumber(); }
 
-    if (offset === parseFloat(width) * (slides.length - 1)) {
-      offset = 0;
+    if (slidesPerView === 1) {
+      if (offset >= slideWidth * (slides.length - 1)) {
+        offset = 0;
+      } else {
+        offset += slideWidth;
+      }
     } else {
-      offset += parseFloat(width);
+      prev.style.display = 'flex';
+
+      // (offset / slideWidth + 1) = номер слайда на который мы перешли
+      // slides.length - slidesPerView 
+      if ((offset / slideWidth + 1) >= slides.length - slidesPerView) {
+        next.style.display = 'none';
+      }
+
+      offset += slideWidth;
     }
+
     slidesField.style.transform = `translateX(-${offset}px)`;
   });
 
@@ -56,10 +71,20 @@ export const slider = ({
     if (!isVisibleSlider()) { return; }
     if (current) { decrementCurrentSlideNumber(); }
 
-    if (offset == 0) {
-      offset = parseFloat(width) * (slides.length - 1);
+    if (slidesPerView === 1) {
+      if (offset <= 0) {
+        offset = slideWidth * (slides.length - 1);
+      } else {
+        offset -= slideWidth;
+      }
     } else {
-      offset -= parseFloat(width);
+      next.style.display = 'flex';
+
+      if (offset <= slideWidth) {
+        prev.style.display = 'none';
+      }
+
+      offset -= slideWidth;
     }
 
     slidesField.style.transform = `translateX(-${offset}px)`;

@@ -32,24 +32,22 @@ export const formula = () => {
     });
   });
 
-  if (window.screen.width < 1026) {
-    const formulaIconsMob = document.querySelectorAll('.desktop-hide .formula-item__icon');
-    root.style.setProperty('--number-degrees', "180deg");
+  const formulaIconsMob = document.querySelectorAll('.desktop-hide .formula-item__icon');
+  root.style.setProperty('--number-degrees', "180deg");
 
-    formulaIconsMob.forEach(icon => {
-      icon.addEventListener('click', (e) => {
-        const item = e.target.closest('.formula-item');
-        item.classList.toggle('active-item');
-      });
+  formulaIconsMob.forEach(icon => {
+    icon.addEventListener('click', (e) => {
+      const item = e.target.closest('.formula-item');
+      item.classList.toggle('active-item');
     });
+  });
 
-    slider({
-      slidesClass: '.formula-slider__slide',
-      prevId: 'formula-arrow_left',
-      nextId: 'formula-arrow_right',
-      slidesWrapperClass: '.formula-slider-wrap',
-      slidesFieldClass: '.formula-slider'
-    });
+  slider({
+    slidesClass: '.formula-slider__slide',
+    prevId: 'formula-arrow_left',
+    nextId: 'formula-arrow_right',
+    slidesWrapperClass: '.formula-slider-wrap',
+    slidesFieldClass: '.formula-slider'
+  });
 
-  }
 };
