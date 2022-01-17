@@ -2299,7 +2299,7 @@ div.wave-block:nth-child(17):after {
     margin-top: 40px;
     z-index: 1;
 }
-
+/* убрал max-width */
 @media (max-width: 900px) {
     .portfolio-slider-wrap {
         max-width: 428px;
@@ -9019,6 +9019,22 @@ strong {
         min-width: max-content;
     }
 
+}
+
+@media (max-width: 1025px) and (min-width: 900px) {
+    .portfolio-slider__slide {
+        flex-wrap: unset;
+    }
+}
+
+.slider-counter,
+#portfolio-arrow-mobile_left,
+#portfolio-arrow-mobile_right {
+    z-index: 11;
+}
+
+.portfolio-slider-container {
+    border-radius: 20px;
 }
 
 .d-none {

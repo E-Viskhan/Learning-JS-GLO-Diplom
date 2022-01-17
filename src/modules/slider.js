@@ -1,16 +1,22 @@
 export const slider = ({
-  slidesClass, prevId, nextId, slidesWrapperClass, slidesFieldClass, totalClass, currentClass, slidesPerView = 1
+  slidesClass, prevId, nextId, slidesWrapperClass, slidesFieldClass, totalClass, currentClass, hideArrows = false, slidesPerView = 1
 }) => {
   const slidesWrapper = document.querySelector(slidesWrapperClass),
-    slides = slidesWrapper.querySelectorAll(slidesClass),
+    slidesField = slidesWrapper.querySelector(slidesFieldClass),
+    slides = slidesField.querySelectorAll(slidesClass),
     prev = document.getElementById(prevId),
     next = document.getElementById(nextId),
-    slidesField = slidesWrapper.querySelector(slidesFieldClass),
     width = getComputedStyle(slidesWrapper).width,
     current = document.querySelector(currentClass),
     total = document.querySelector(totalClass),
     isVisibleSlider = () => getComputedStyle(slidesField).display !== 'none',
-    setTotalSlidesNumber = () => total.textContent = slides.length,
+    setTotalSlidesNumber = () => {
+      if (slidesPerView === 1) {
+        total.textContent = slides.length;
+      } else {
+        total.textContent = slides.length - (slidesPerView - 1);
+      }
+    },
     slideWidth = Math.ceil(parseFloat(width) / slidesPerView);
 
   const incrementCurrentSlideNumber = () => {
@@ -46,7 +52,7 @@ export const slider = ({
     if (!isVisibleSlider()) { return; }
     if (current) { incrementCurrentSlideNumber(); }
 
-    if (slidesPerView === 1) {
+    if (!hideArrows) {
       if (offset >= slideWidth * (slides.length - 1)) {
         offset = 0;
       } else {
@@ -54,9 +60,6 @@ export const slider = ({
       }
     } else {
       prev.style.display = 'flex';
-
-      // (offset / slideWidth + 1) = номер слайда на который мы перешли
-      // slides.length - slidesPerView 
       if ((offset / slideWidth + 1) >= slides.length - slidesPerView) {
         next.style.display = 'none';
       }
@@ -71,7 +74,7 @@ export const slider = ({
     if (!isVisibleSlider()) { return; }
     if (current) { decrementCurrentSlideNumber(); }
 
-    if (slidesPerView === 1) {
+    if (!hideArrows) {
       if (offset <= 0) {
         offset = slideWidth * (slides.length - 1);
       } else {
