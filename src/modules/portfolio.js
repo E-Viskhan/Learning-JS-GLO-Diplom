@@ -1,6 +1,27 @@
+import { togglePopup } from './helpers';
 import { slider } from './slider';
 
 export const portfolio = () => {
+  const portfolioContainer = document.querySelector('.portfolio-slider-container');
+  portfolioContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('portfolio-slider__slide-frame')) {
+      const portfolioPopup = document.querySelector('.popup-portfolio');
+      togglePopup(portfolioPopup);
+    }
+  });
+
+  slider({
+    slidesWrapperClass: '.popup-portfolio-slider-wrap',
+    slidesFieldClass: '.popup-portfolio-slider',
+    slidesClass: '.popup-portfolio-slider__slide',
+    prevId: 'popup_portfolio_left',
+    nextId: 'popup_portfolio_right',
+    slidesPerView: 1,
+    currentClass: '#popup-portfolio-counter .slider-counter-content__current',
+    totalClass: '#popup-portfolio-counter .slider-counter-content__total',
+    changeDisplayClass: '.popup-portfolio-text'
+  });
+
   if (window.screen.width > 1025) {
     slider({
       slidesWrapperClass: '.portfolio-slider-container',

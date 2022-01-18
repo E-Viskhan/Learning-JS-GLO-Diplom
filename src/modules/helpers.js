@@ -76,4 +76,12 @@ const animateValue = (obj, start, end, duration) => {
   window.requestAnimationFrame(step);
 };
 
-export { animate, blockBody, unblockBody, animateValue, smoothScroll };
+const togglePopup = (popup, e = '') => {
+  popup.classList.toggle('popup--active');
+
+  popup.classList.contains('popup--active') ? blockBody() : unblockBody();
+
+  if (popup.matches('.popup-repair-types.popup--active')) { e.preventDefault(); }
+};
+
+export { animate, blockBody, unblockBody, animateValue, smoothScroll, togglePopup };

@@ -1,5 +1,5 @@
 export const slider = ({
-  slidesClass, prevId, nextId, slidesWrapperClass, slidesFieldClass, totalClass, currentClass, hideArrows = false, slidesPerView = 1
+  slidesClass, prevId, nextId, slidesWrapperClass, slidesFieldClass, totalClass, currentClass, changeDisplayClass = false, hideArrows = false, slidesPerView = 1
 }) => {
   const slidesWrapper = document.querySelector(slidesWrapperClass),
     slidesField = slidesWrapper.querySelector(slidesFieldClass),
@@ -9,6 +9,7 @@ export const slider = ({
     width = getComputedStyle(slidesWrapper).width,
     current = document.querySelector(currentClass),
     total = document.querySelector(totalClass),
+    changeElems = document.querySelectorAll(changeDisplayClass),
     isVisibleSlider = () => getComputedStyle(slidesField).display !== 'none',
     setTotalSlidesNumber = () => {
       if (slidesPerView === 1) {
@@ -35,9 +36,19 @@ export const slider = ({
     }
   };
 
-  if (total) { setTotalSlidesNumber(); }
+  const changeDisplayElems = () => {
+    const currentSlideIndex = current ? +current.textContent - 1 : 0;
+    const prevSlideIndex = currentSlideIndex === 0 ? slides.length - 1 : currentSlideIndex - 1;
+
+    changeElems[prevSlideIndex].style.display = 'none';
+    changeElems[currentSlideIndex].style.display = 'block';
+  };
 
   let offset = 0;
+
+  if (total) { setTotalSlidesNumber(); }
+  if (changeElems.length) { changeDisplayElems(); }
+
 
   slidesField.style.width = 100 * slides.length / slidesPerView + '%';
   slidesField.style.display = 'flex';
@@ -51,6 +62,7 @@ export const slider = ({
   next.addEventListener('click', () => {
     if (!isVisibleSlider()) { return; }
     if (current) { incrementCurrentSlideNumber(); }
+    if (changeElems) { changeDisplayElems(); }
 
     if (!hideArrows) {
       if (offset >= slideWidth * (slides.length - 1)) {
@@ -73,6 +85,7 @@ export const slider = ({
   prev.addEventListener('click', () => {
     if (!isVisibleSlider()) { return; }
     if (current) { decrementCurrentSlideNumber(); }
+    if (changeElems) { changeDisplayElems(); }
 
     if (!hideArrows) {
       if (offset <= 0) {

@@ -1,4 +1,4 @@
-import { blockBody, smoothScroll, unblockBody } from "./helpers";
+import { blockBody, smoothScroll, unblockBody, togglePopup } from "./helpers";
 
 export const header = () => {
   const headerArrowBlock = document.querySelector('.header-contacts__arrow');
@@ -30,14 +30,6 @@ export const header = () => {
     popupMenu.classList.remove('popup-menu--active');
     popupDialog.classList.remove('popup-dialog-menu--active');
     unblockBody();
-  };
-
-  const togglePopup = (popup, e = '') => {
-    popup.classList.toggle('popup--active');
-
-    popup.classList.contains('popup--active') ? blockBody() : unblockBody();
-
-    if (popup.matches('.popup-repair-types.popup--active')) { e.preventDefault(); }
   };
 
   menuIcon.addEventListener('click', openMenu);
