@@ -11,6 +11,7 @@ export const header = () => {
   const showAllServicesBtns = document.querySelectorAll('.show-all-services');
   const popularRepairTypes = document.querySelector('.popup-repair-types');
   const privacy = document.querySelector('.popup-privacy');
+  const consultation = document.querySelector('.popup-consultation');
 
   const toggleShowContact = () => {
     secondContactAccord.classList.toggle('header-contacts__phone-number-accord--open');
@@ -47,6 +48,8 @@ export const header = () => {
       smoothScroll(link, e);
     } else if (target.classList.contains('link-privacy')) {
       togglePopup(privacy);
+    } else if (target.classList.contains('button_consult')) {
+      togglePopup(consultation);
     } else if (target.closest('.close') || target.classList.contains('popup--active')) {
       const popup = target.closest('.popup--active');
       togglePopup(popup);
