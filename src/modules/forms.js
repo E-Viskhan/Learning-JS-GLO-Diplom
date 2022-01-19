@@ -1,10 +1,11 @@
+import { togglePopup } from "./helpers";
 import { maskPhone } from "./maskPhone";
 
 export const forms = () => {
   const forms = document.querySelectorAll('form');
 
   const sendForm = (data) => {
-    return fetch('../server.php', {
+    return fetch('https://jsonplaceholder.typicode.com/comments/', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -51,7 +52,10 @@ export const forms = () => {
         formValues[key] = val;
       });
 
-      sendForm(formValues);
+      sendForm(formValues).then(() => {
+        const thankPopup = document.querySelector('.popup-thank');
+        togglePopup(thankPopup);
+      });
       this.reset();
     }
 
