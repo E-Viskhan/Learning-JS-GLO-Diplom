@@ -1,15 +1,16 @@
 export const slider = ({
-  slidesClass, prevId, nextId, slidesWrapperClass, slidesFieldClass, totalClass, currentClass, changeDisplayClass = false, hideArrows = false, slidesPerView = 1
+  slidesClass, prevSelector, nextSelector, slidesWrapperClass, slidesFieldClass, totalClass, currentClass, changeDisplayClass = false, hideArrows = false, slidesPerView = 1, initialSlide = false
 }) => {
   const slidesWrapper = document.querySelector(slidesWrapperClass),
     slidesField = slidesWrapper.querySelector(slidesFieldClass),
     slides = slidesField.querySelectorAll(slidesClass),
-    prev = document.getElementById(prevId),
-    next = document.getElementById(nextId),
+    prev = document.querySelector(prevSelector),
+    next = document.querySelector(nextSelector),
     width = getComputedStyle(slidesWrapper).width,
     current = document.querySelector(currentClass),
     total = document.querySelector(totalClass),
     changeElems = document.querySelectorAll(changeDisplayClass),
+    slideWidth = Math.ceil(parseFloat(width) / slidesPerView),
     isVisibleSlider = () => getComputedStyle(slidesField).display !== 'none',
     setTotalSlidesNumber = () => {
       if (slidesPerView === 1) {
@@ -18,7 +19,10 @@ export const slider = ({
         total.textContent = slides.length - (slidesPerView - 1);
       }
     },
-    slideWidth = Math.ceil(parseFloat(width) / slidesPerView);
+    isSliderExists = () => {
+      const slide = slidesWrapper.querySelector(slidesClass);
+      return parseFloat(slide.style.width) === slideWidth ? true : false;
+    };
 
   const incrementCurrentSlideNumber = () => {
     if (+current.textContent === slides.length) {
@@ -44,11 +48,14 @@ export const slider = ({
     changeElems[currentSlideIndex].style.display = 'block';
   };
 
+  const setOffset = () => {
+    offset = +slidesField.style.transform.match(/([0-9\.]+)/)[0];
+  };
+
   let offset = 0;
 
   if (total) { setTotalSlidesNumber(); }
   if (changeElems.length) { changeDisplayElems(); }
-
 
   slidesField.style.width = 100 * slides.length / slidesPerView + '%';
   slidesField.style.display = 'flex';
@@ -61,11 +68,13 @@ export const slider = ({
 
   next.addEventListener('click', () => {
     if (!isVisibleSlider()) { return; }
+    if (initialSlide) { setOffset(); }
     if (current) { incrementCurrentSlideNumber(); }
-    if (changeElems) { changeDisplayElems(); }
+    if (changeElems.length) { changeDisplayElems(); }
 
     if (!hideArrows) {
       if (offset >= slideWidth * (slides.length - 1)) {
+        console.log('true');
         offset = 0;
       } else {
         offset += slideWidth;
@@ -84,8 +93,9 @@ export const slider = ({
 
   prev.addEventListener('click', () => {
     if (!isVisibleSlider()) { return; }
+    if (initialSlide) { setOffset(); }
     if (current) { decrementCurrentSlideNumber(); }
-    if (changeElems) { changeDisplayElems(); }
+    if (changeElems.length) { changeDisplayElems(); }
 
     if (!hideArrows) {
       if (offset <= 0) {

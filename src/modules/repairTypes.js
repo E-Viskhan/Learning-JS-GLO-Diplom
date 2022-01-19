@@ -13,8 +13,8 @@ export const repairTypes = () => {
   if (window.screen.width < 1025) {
     slider({
       slidesClass: '.repair-types-nav__item',
-      prevId: 'nav-arrow-repair-left_base',
-      nextId: 'nav-arrow-repair-right_base',
+      prevSelector: '#nav-arrow-repair-left_base',
+      nextSelector: '#nav-arrow-repair-right_base',
       slidesWrapperClass: '.repair-types-nav',
       slidesFieldClass: '.nav-list-repair'
     });
@@ -23,8 +23,8 @@ export const repairTypes = () => {
   sliders.forEach((item, index) => {
     slider({
       slidesClass: `.types-repair${index + 1} .repair-types-slider__slide`,
-      prevId: 'repair-types-arrow_left',
-      nextId: 'repair-types-arrow_right',
+      prevSelector: '#repair-types-arrow_left',
+      nextSelector: '#repair-types-arrow_right',
       slidesWrapperClass: '.repair-types-slider',
       slidesFieldClass: `.types-repair${index + 1}`,
       currentClass: '.slider-counter-content__current',

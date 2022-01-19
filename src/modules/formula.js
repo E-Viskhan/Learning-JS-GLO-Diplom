@@ -44,8 +44,8 @@ export const formula = () => {
 
   slider({
     slidesClass: '.formula-slider__slide',
-    prevId: 'formula-arrow_left',
-    nextId: 'formula-arrow_right',
+    prevSelector: '#formula-arrow_left',
+    nextSelector: '#formula-arrow_right',
     slidesWrapperClass: '.formula-slider-wrap',
     slidesFieldClass: '.formula-slider'
   });
