@@ -8,8 +8,6 @@ export const header = () => {
   const menuIcon = document.querySelector('.menu__icon');
   const popupMenu = document.querySelector('.popup-menu');
   const popupDialog = popupMenu.querySelector('.popup-dialog-menu');
-  const showAllServicesBtns = document.querySelectorAll('.show-all-services');
-  const popularRepairTypes = document.querySelector('.popup-repair-types');
   const privacy = document.querySelector('.popup-privacy');
   const consultation = document.querySelector('.popup-consultation');
 
@@ -56,8 +54,4 @@ export const header = () => {
     }
 
   });
-
-  showAllServicesBtns.forEach(btn => btn.addEventListener('click', (e) => {
-    togglePopup(popularRepairTypes, e);
-  }));
 };

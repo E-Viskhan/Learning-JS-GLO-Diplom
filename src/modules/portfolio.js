@@ -7,7 +7,6 @@ export const portfolio = () => {
     const target = e.target;
 
     const initialSlide = +target.closest('.portfolio-slider__slide-frame').dataset.initialSlide;
-    console.log('~ initialSlide', initialSlide);
     const portfolioSlider = document.querySelector('.popup-portfolio-slider');
     const slide = portfolioSlider.querySelector('.popup-portfolio-slider__slide');
     const slideWidth = parseFloat(slide.style.width);

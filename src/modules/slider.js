@@ -74,7 +74,6 @@ export const slider = ({
 
     if (!hideArrows) {
       if (offset >= slideWidth * (slides.length - 1)) {
-        console.log('true');
         offset = 0;
       } else {
         offset += slideWidth;
