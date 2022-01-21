@@ -1,40 +1,34 @@
 import { getData, sendData } from './repuests';
 
+const url = 'http://localhost:3000/services/';
+
 export class ApiService {
-
-  getUsers() {
-    return getData('http://localhost:4545/users');
+  async getServices() {
+    return getData(url);
   }
 
-  getUser(userId) {
-    return getData(`http://localhost:4545/users/${userId}`);
+  async getService(serviceId) {
+    return getData(url + serviceId);
   }
 
-  addUser(user) {
-    return sendData({ url: 'http://localhost:4545/userss', data: user });
+  async addService(service) {
+    return sendData({ url, data: service });
   }
 
-  removeUser(userId) {
-    return sendData({
-      url: `http://localhost:4545/users/${userId}`,
-      method: 'DELETE'
-    });
+  async removeService(serviceId) {
+    return sendData({ url: url + serviceId, method: 'DELETE' });
   }
 
-  changeUser(userId, data) {
-    return sendData({
-      url: `http://localhost:4545/users/${userId}`,
-      data,
-      method: 'PATCH'
-    });
+  async changeService(serviceId, data) {
+    return sendData({ url: url + serviceId, data, method: 'PATCH' });
   }
 
-  editUser(userId, user) {
-    return sendData({
-      url: `http://localhost:4545/users/${userId}`,
-      data: user,
-      method: 'PUT'
-    });
+  async replaceService(serviceId, service) {
+    return sendData({ url: url + serviceId, data: service, method: 'PUT' });
+  }
+
+  async filterServices(serviceType) {
+    return getData(`${url}?type=${serviceType}`);
   }
 
   async filterUsers(filterOption) {
@@ -49,5 +43,3 @@ export class ApiService {
     return getData(`http://localhost:4545/users?name_like=${str}`);
   }
 }
-
-export default {};

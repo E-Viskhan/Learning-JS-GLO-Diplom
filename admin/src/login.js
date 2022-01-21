@@ -24,6 +24,7 @@ const formHandler = async (e) => {
     setCookie('access', 'true');
     redirectToAdmin();
   } else {
+    form.reset();
     showAuthError();
   }
 };

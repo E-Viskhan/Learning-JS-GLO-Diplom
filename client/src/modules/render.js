@@ -1,9 +1,5 @@
 import { getRepairItem, getRepairType } from "./templates";
-
-const getServices = async () => {
-  const res = await fetch('http://localhost:3000/services/');
-  return await res.json();
-};
+import { getServiceTypes } from "./getServiceTypes";
 
 const renderServices = (container, services) => {
   container.innerHTML = '';
@@ -15,13 +11,11 @@ const renderServices = (container, services) => {
 };
 
 const renderTypesServices = async (container) => {
-  const types = new Set();
-  const services = await getServices();
+  const types = await getServiceTypes();
 
   let serviceIndex = 0;
 
   container.innerHTML = '';
-  services.forEach(service => types.add(service.type));
   types.forEach(type => {
     const repairType = getRepairType(type, serviceIndex);
 
