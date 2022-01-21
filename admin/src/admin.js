@@ -1,3 +1,3 @@
-import { first } from "./modules/first";
+import { checkAuth } from "./modules/checkAuth";
 
-first();
+checkAuth();
