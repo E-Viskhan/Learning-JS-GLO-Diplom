@@ -1,11 +1,13 @@
 const path = require('path');
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
-  entry: './index.js',
+  entry: {
+    'client/dist/js/main': path.resolve(__dirname, 'client/src/index.js'),
+    'admin/dist/js/admin': path.resolve(__dirname, 'admin/src/admin.js')
+  },
   output: {
-    filename: 'js/main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname),
+    filename: '[name].js'
   },
   devServer: {
     hot: true,
