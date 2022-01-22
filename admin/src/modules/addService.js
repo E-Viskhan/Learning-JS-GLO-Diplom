@@ -1,46 +1,18 @@
 import { blockBody, unblockBody } from '../../../client/src/modules/helpers';
 import { renderServices } from './render';
+import { toggleModal } from './helpers';
 
 export const addService = () => {
   const addBtn = document.querySelector('.btn-addItem');
-  const modal = document.getElementById('modal');
   const form = document.getElementById('form');
+  const modalHeader = document.querySelector('.modal__header');
 
-  const toggleModal = () => {
-    modal.classList.toggle('d-none');
-  };
+  modalHeader.textContent = 'Добавение новой услуги';
 
   addBtn.addEventListener('click', (e) => {
+    form.dataset.method = 'add';
     toggleModal();
     blockBody();
-  });
-
-  modal.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const target = e.target;
-
-    if (target.classList.contains('modal__overlay') || target.closest('.button__close') ||
-      target.closest('.cancel-button')) {
-      form.reset();
-      toggleModal();
-      unblockBody();
-    } else if (target.closest('#submit')) {
-      const formData = new FormData(form);
-      let data = {};
-
-      for (let [key, value] of formData) {
-        data[key] = value;
-      }
-
-      apiService.addService(data).then(() => {
-        apiService.getServices().then(services => renderServices(services));
-      });
-
-      form.reset();
-      toggleModal();
-      unblockBody();
-    }
   });
 
 };
