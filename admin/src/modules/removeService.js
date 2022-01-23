@@ -1,4 +1,4 @@
-import { reRender } from "./render";
+import { showFilterServices } from "./filterServices";
 
 export const removeService = () => {
   const tBody = document.getElementById('tbody');
@@ -9,7 +9,7 @@ export const removeService = () => {
     if (e.target.closest('.action-remove')) {
       const serviceId = target.closest('tr').querySelector('.table__id').textContent;
 
-      apiService.removeService(serviceId).then(() => reRender());
+      apiService.removeService(serviceId).then(() => showFilterServices());
     }
   });
 };

@@ -3,6 +3,8 @@ import { maskPhone } from "./maskPhone";
 
 export const forms = () => {
   const forms = document.querySelectorAll('form');
+  const thankPopup = document.querySelector('.popup-thank');
+  const consultation = document.querySelector('.popup-consultation');
 
   const sendForm = (data) => {
     return fetch('https://jsonplaceholder.typicode.com/comments/', {
@@ -14,6 +16,12 @@ export const forms = () => {
     })
       .then(res => res.json())
       .catch(() => console.error(new Error('Ошибка отправки данных из формы')));
+  };
+
+  const hideConsultationPopup = () => {
+    if (consultation.classList.contains('popup--active')) {
+      consultation.classList.remove('popup--active');
+    }
   };
 
   forms.forEach(form => form.addEventListener('submit', function (e) {
@@ -34,6 +42,9 @@ export const forms = () => {
           if (input.value.trim() === '') {
             alert("Пожалуйста, напишите ваше имя.");
             check = false;
+          } else if (input.value.trim().length < 2) {
+            alert("Имя слишком короткое!");
+            check = false;
           }
           break;
       }
@@ -53,8 +64,9 @@ export const forms = () => {
       });
 
       sendForm(formValues).then(() => {
-        const thankPopup = document.querySelector('.popup-thank');
+        hideConsultationPopup();
         togglePopup(thankPopup);
+        setTimeout(() => togglePopup(thankPopup), 2000);
       });
       this.reset();
     }

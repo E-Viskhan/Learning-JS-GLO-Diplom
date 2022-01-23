@@ -1,6 +1,6 @@
 import { unblockBody } from "../../../client/src/modules/helpers";
-import { reRender } from "./render";
 import { toggleModal } from "./helpers";
+import { showFilterServices } from "./filterServices";
 
 export const modal = () => {
   const modal = document.getElementById('modal');
@@ -31,11 +31,11 @@ export const modal = () => {
 
       switch (form.dataset.method) {
         case 'add':
-          apiService.addService(data).then(() => reRender());
+          apiService.addService(data).then(() => showFilterServices());
           break;
         case 'change':
           const serviceId = form.dataset.serviceId;
-          apiService.changeService(serviceId, data).then(() => reRender());
+          apiService.changeService(serviceId, data).then(() => showFilterServices());
           break;
       }
       closeModal();

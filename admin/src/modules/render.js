@@ -24,8 +24,4 @@ const renderServices = (services) => {
   });
 };
 
-const reRender = () => {
-  apiService.getServices().then(services => renderServices(services));
-};
-
-export { renderTypesServices, renderServices, reRender };
+export { renderTypesServices, renderServices };
