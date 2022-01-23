@@ -3,6 +3,7 @@ import { slider } from "./slider";
 export const formula = () => {
   const formulaIcons = document.querySelectorAll('.mobile-hide .formula-item__icon');
   const root = document.querySelector(':root');
+  const activeClass = 'active-item';
 
   formulaIcons.forEach(icon => {
     icon.addEventListener('mouseenter', function (e) {
@@ -10,7 +11,6 @@ export const formula = () => {
       const popup = item.querySelector('.formula-item-popup');
       const freePlace = item.getBoundingClientRect().top;
       const popupNeedPlace = parseInt(getComputedStyle(popup).height) + 15;
-
 
       if (freePlace < popupNeedPlace) {
         root.style.setProperty('--number-degrees', "180deg");
@@ -22,13 +22,13 @@ export const formula = () => {
         popup.style.bottom = '90px';
       }
 
-      item.classList.add('active-item');
+      item.classList.add(activeClass);
     });
 
     icon.addEventListener('mouseleave', function (e) {
       const target = e.target;
       const item = target.closest('.formula-item');
-      item.classList.remove('active-item');
+      item.classList.remove(activeClass);
     });
   });
 
@@ -37,8 +37,14 @@ export const formula = () => {
 
   formulaIconsMob.forEach(icon => {
     icon.addEventListener('click', (e) => {
+      const lastActiveItem = document.querySelector('.formula-slider__slide.active-item');
       const item = e.target.closest('.formula-item');
-      item.classList.toggle('active-item');
+
+      if (lastActiveItem) {
+        lastActiveItem.classList.remove(activeClass);
+      }
+
+      item.classList.add(activeClass);
     });
   });
 

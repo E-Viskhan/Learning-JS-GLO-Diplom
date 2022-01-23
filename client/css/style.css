@@ -8612,24 +8612,24 @@ strong {
     .mobile-row td:nth-child(2) {
         width: 50%;
         text-align: center;
-        display: none;
+        /* display: none; */
     }
 
     .mobile-row td:nth-child(3) {
         width: 50%;
         text-align: center;
-        display: none;
+        /* display: none; */
     }
 
     .mobile-row td:nth-child(4) {
         width: 50%;
         text-align: center;
-        display: none;
+        /* display: none; */
     }
 
     .mobile-row td:nth-child(5) {
         width: 50%;
-        display: none;
+        /* display: none; */
     }
 }
 
