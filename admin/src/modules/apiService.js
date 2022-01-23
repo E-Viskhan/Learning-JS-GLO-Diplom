@@ -31,7 +31,7 @@ export class ApiService {
     return getData(`${url}?type=${serviceType}`);
   }
 
-  async getSortUsers({ sortOptionName, order }) {
+  async getSortServices({ sortOptionName, order }) {
     return getData(`http://localhost:4545/users?_sort=${sortOptionName}&_order=${order}`);
   }
 

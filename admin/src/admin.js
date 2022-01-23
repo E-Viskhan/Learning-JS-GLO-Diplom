@@ -6,6 +6,7 @@ import { addService } from "./modules/addService";
 import { changeService } from "./modules/changeService";
 import { removeService } from "./modules/removeService";
 import { modal } from "./modules/modal";
+import { sortServices } from "./modules/sortServices";
 
 checkAuth();
 
@@ -19,3 +20,4 @@ filterServices();
 addService();
 changeService();
 removeService();
+sortServices();
