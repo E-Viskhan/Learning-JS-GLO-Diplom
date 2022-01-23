@@ -13,7 +13,7 @@ export const portfolio = () => {
     const current = document.querySelector('#popup-portfolio-counter .slider-counter-content__current');
     document.querySelectorAll('.popup-portfolio-text').forEach((slideText, index) => {
       if (index === (initialSlide - 1)) {
-        slideText.style.display = 'block';
+        slideText.style.display = 'flex';
       } else {
         slideText.style.display = 'none';
       }

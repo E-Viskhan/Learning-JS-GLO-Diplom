@@ -45,7 +45,7 @@ export const slider = ({
     const prevSlideIndex = currentSlideIndex === 0 ? slides.length - 1 : currentSlideIndex - 1;
 
     changeElems[prevSlideIndex].style.display = 'none';
-    changeElems[currentSlideIndex].style.display = 'block';
+    changeElems[currentSlideIndex].style.display = 'flex';
   };
 
   const setOffset = () => {
